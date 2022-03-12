@@ -11,3 +11,6 @@
 .idea
 **/node_module
 **/*.class
+**/.mvn
+**/.angular
+**/target
