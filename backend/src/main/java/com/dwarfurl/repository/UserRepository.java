@@ -1,4 +1,4 @@
-package com.dwarfurl.dao;
+package com.dwarfurl.repository;
 
 import com.dwarfurl.model.User;
 import org.springframework.data.repository.CrudRepository;

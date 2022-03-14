@@ -9,13 +9,29 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "short_url")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ShortUrl {
 
     @Id
-    private String shortUrl;
+    private String hash;
     @Column(unique = true)
     private String longUrl;
 
     private Long clicks;
+
+    public void addClick() {
+        this.clicks++;
+    }
+
+    @Override
+    public String toString() {
+        return "ShortUrl{" +
+                "shortUrl='" + hash + '\'' +
+                ", longUrl='" + longUrl + '\'' +
+                ", clicks=" + clicks +
+                '}';
+    }
 }

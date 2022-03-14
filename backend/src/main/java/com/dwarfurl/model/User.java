@@ -7,7 +7,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -15,28 +17,20 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    @Column(unique = true, length = 8)
+    @Column(unique = true, length = 15, nullable = false)
     private String username;
 
-    @Column(unique = true, length = 20)
+    @Column(unique = true, length = 30, nullable = false)
     private String email;
 
-    @Column(length = 15)
+    @Column(length = 20)
     private String firstName;
-    @Column(length = 15)
+    @Column(length = 20)
     private String lastName;
-    @Column(length = 15)
+    @Column(length = 20, nullable = false)
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     List<ShortUrl> shortUrls;
-
-    public User(String username, String email, String firstName, String lastName, String password) {
-        this.username = username;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-    }
 }
