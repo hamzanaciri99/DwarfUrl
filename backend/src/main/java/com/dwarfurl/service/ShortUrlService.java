@@ -24,7 +24,6 @@ public class ShortUrlService {
 
     @Autowired
     public ShortUrlService(ShortUrlRepository shortUrlRepository) {
-        System.out.println("Constructor called");
         this.shortUrlRepository = shortUrlRepository;
     }
 

@@ -27,7 +27,7 @@ public class User {
     private String firstName;
     @Column(length = 20)
     private String lastName;
-    @Column(length = 20, nullable = false)
+    @Column(nullable = false)
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
