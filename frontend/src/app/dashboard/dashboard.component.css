@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  margin: auto;
+  width: 80%;
+}
+.add-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.shortUrlsTable {
+  width: 100%;
+}
+.mat-row {
+  height: auto;
+}
+
+.mat-cell {
+  padding: 8px 8px 8px 0;
+}
+
+.logo img {
+  display: block;
+  margin: 20px auto;
+  width: 250px;
+}

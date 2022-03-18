@@ -30,17 +30,19 @@ public class ShortUrlController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping(value = "{userId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ShortUrl> add(@RequestBody ShortUrl shortUrl, @PathVariable("userId") Long userId) {
+    @PostMapping(value = {"{userId}", ""} )
+    public ResponseEntity<ShortUrl> add(@RequestBody ShortUrl shortUrl, @PathVariable("userId") Optional<Long> userId) {
         String hash = shortUrlService.getHash();
         shortUrl.setHash(hash);
         shortUrl.setClicks(0L);
         final ShortUrl newShortUrl = shortUrlRepository.save(shortUrl);
 
-        Optional<User> user = userRepository.findById(userId);
-        user.ifPresent(u -> {
-            u.getShortUrls().add(newShortUrl);
-            userRepository.save(u);
+        userId.ifPresent(id -> {
+            Optional<User> user = userRepository.findById(id);
+            user.ifPresent(u -> {
+                u.getShortUrls().add(newShortUrl);
+                userRepository.save(u);
+            });
         });
 
         return new ResponseEntity<>(newShortUrl, HttpStatus.CREATED);
@@ -53,7 +55,7 @@ public class ShortUrlController {
         if(userOptional.isPresent()) {
             User user = userOptional.get();
             Predicate<ShortUrl> predicate = shortUrl -> shortUrl.getHash().equals(hash);
-            if(user.getShortUrls().stream().filter(predicate).count() == 0) {
+            if(user.getShortUrls().stream().noneMatch(predicate)) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
             user.getShortUrls().removeIf(predicate);

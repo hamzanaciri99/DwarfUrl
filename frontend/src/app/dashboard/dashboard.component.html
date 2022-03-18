@@ -1,0 +1,61 @@
+<div class="logo">
+  <img src="assets/logo.png" alt="Dwarf urls" />
+</div>
+<div class="add-wrapper">
+  <mat-form-field appearance="outline" [style.width.%]="60" floatLabel="always">
+    <mat-label >Url</mat-label>
+    <input matInput type="text" placeholder="https://www.dwarf.url/" [(ngModel)]="url">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="onShorten()">Shorten</button>
+</div>
+<div class="urls">
+  <mat-paginator
+    [pageSizeOptions]="[5,10,25,100]"
+    showFirstLastButtons
+    aria-label="Select page" #paginator></mat-paginator>
+  <table mat-table [dataSource]="dataSource" class="shortUrlsTable" #shortUrlsTable>
+    <ng-container matColumnDef="longUrl">
+      <th mat-header-cell *matHeaderCellDef>Long Url</th>
+      <td mat-cell *matCellDef="let shortUrl">
+        <a class="mat-tab-link" [href]="shortUrl.longUrl" target="_blank">
+          {{shortUrl.longUrl}}
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="shortUrl">
+      <th mat-header-cell *matHeaderCellDef>Short Url</th>
+      <td mat-cell *matCellDef="let shortUrl">
+        <a class="mat-tab-link" [href]="BASE_URL + shortUrl.hash" target="_blank">
+          {{BASE_URL + shortUrl.hash}}
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="clicks">
+      <th mat-header-cell *matHeaderCellDef>Clicks</th>
+      <td mat-cell *matCellDef="let shortUrl">{{shortUrl.clicks}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="copy">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let shortUrl">
+        <button mat-icon-button color="primary" matTooltip="Copy short url" (click)="copyUrl(shortUrl)">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="remove">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let shortUrl">
+        <button mat-icon-button color="primary" matTooltip="remove" (click)="removeUrl(shortUrl)">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let _row; columns: columnsToDisplay;"></tr>
+  </table>
+</div>
