@@ -17,9 +17,7 @@ public class ShortUrl {
 
     @Id
     private String hash;
-    @Column(unique = true)
     private String longUrl;
-
     private Long clicks;
 
     public void addClick() {

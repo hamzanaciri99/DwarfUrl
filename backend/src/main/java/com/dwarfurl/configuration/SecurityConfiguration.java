@@ -44,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/login").permitAll()
                 .antMatchers("/user/signup").permitAll()
                 .antMatchers("/user/isLoggedIn").permitAll()
-                .anyRequest().authenticated().and();
+                .anyRequest().permitAll().and();//.authenticated().and();
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))

@@ -1,1 +1,46 @@
-<h1>Dwarf Url</h1>
+<div class="main-wrapper">
+  <mat-toolbar class="mat-elevation-z4">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Dwarf url</span>
+
+    <div class="flex-left">
+      <button mat-raised-button>
+        Login
+      </button>
+      <button mat-raised-button color="primary">
+        Signup
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" opened="true" #sidenav>
+      <mat-action-list disableRipple="true">
+        <mat-list-item active>
+          <div class="list-item">
+            <mat-icon>link</mat-icon>
+            <span>Urls</span>
+          </div>
+        </mat-list-item>
+        <mat-list-item disableRipple="true">
+          <div class="list-item">
+            <mat-icon>person</mat-icon>
+            <span>Profile</span>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item disableRipple="true">
+          <div class="list-item">
+            <mat-icon>bug_report</mat-icon>
+            <span>Report website bugs</span>
+          </div>
+        </mat-list-item>
+      </mat-action-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <app-dashboard></app-dashboard>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

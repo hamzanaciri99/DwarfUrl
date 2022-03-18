@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @RestController
 @RequestMapping(path = "url")
@@ -31,12 +32,6 @@ public class ShortUrlController {
 
     @PostMapping(value = "{userId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ShortUrl> add(@RequestBody ShortUrl shortUrl, @PathVariable("userId") Long userId) {
-
-        Optional<ShortUrl> shortUrlOptional = shortUrlRepository.findShortUrlByLongUrl(shortUrl.getLongUrl());
-        if (shortUrlOptional.isPresent()) {
-            return new ResponseEntity<>(shortUrlOptional.get(), HttpStatus.OK);
-        }
-
         String hash = shortUrlService.getHash();
         shortUrl.setHash(hash);
         shortUrl.setClicks(0L);
@@ -49,6 +44,22 @@ public class ShortUrlController {
         });
 
         return new ResponseEntity<>(newShortUrl, HttpStatus.CREATED);
+    }
+
+
+    @DeleteMapping("{hash}")
+    public ResponseEntity<Void> delete(@PathVariable String hash, @RequestParam Long userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if(userOptional.isPresent()) {
+            User user = userOptional.get();
+            Predicate<ShortUrl> predicate = shortUrl -> shortUrl.getHash().equals(hash);
+            if(user.getShortUrls().stream().filter(predicate).count() == 0) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            user.getShortUrls().removeIf(predicate);
+            userRepository.save(user);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("{hash}")

@@ -15,10 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,14 +38,14 @@ public class UserController {
         this.authenticationManager = authenticationManager;
     }
 
-    @GetMapping("urls")
-    public ResponseEntity<List<ShortUrl>> getShortUrls(@RequestBody User user) {
-        Optional<User> userOptional = userRepository.findById(user.getId());
-        if (userOptional.isEmpty()) {
+    @GetMapping("{userId}/urls")
+    public ResponseEntity<List<ShortUrl>> getShortUrls(@PathVariable("userId") Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(userOptional.get().getShortUrls(), HttpStatus.OK);
+        return new ResponseEntity<>(user.get().getShortUrls(), HttpStatus.OK);
     }
 
     @PostMapping("signup")
