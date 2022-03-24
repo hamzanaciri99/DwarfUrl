@@ -5,6 +5,8 @@ import {MatRow, MatTable, MatTableDataSource} from "@angular/material/table";
 import {map} from "rxjs";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {User} from "../model/User";
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -18,18 +20,26 @@ export class DashboardComponent implements OnInit {
   url: string = '';
 
   _shortUrls: ShortUrl[] = [];
-  columnsToDisplay: string[] = ['longUrl', 'shortUrl', 'clicks', 'copy', 'remove'];
+  columnsToDisplay: string[] = ['longUrl', 'shortUrl', 'clicks', 'copy'];
   @ViewChild('shortUrlsTable') shortUrlsTable!: MatTable<ShortUrl>;
 
-  pageSize: number = 10;
   @ViewChild('paginator') paginator!: MatPaginator;
   dataSource: MatTableDataSource<ShortUrl> = new MatTableDataSource<ShortUrl>();
 
-  constructor(private urlService: UrlService, private _snackBar: MatSnackBar) {
+  constructor(private urlService: UrlService,
+              public userService: UserService,
+              private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
-    this.fetchUrls();
+    this.userService.currentUserSubject.subscribe(user => {
+      this.fetchUrls();
+      if(this.userService.isLoggedIn()) {
+        this.columnsToDisplay.push('remove');
+      } else {
+        this.columnsToDisplay = this.columnsToDisplay.filter(column => column !== 'remove')
+      }
+    })
   }
 
   get shortUrls() { return this._shortUrls; }
@@ -42,16 +52,16 @@ export class DashboardComponent implements OnInit {
 
 
   fetchUrls() {
-    this.urlService.get({ id: 1 })
+    this.urlService.get(this.userService.currentUser)
       .pipe(map(shortUrls =>
         shortUrls.map(shortUrl => ({...shortUrl, hash: shortUrl.hash}))
       ))
-      .subscribe((shortUrls) => { this.shortUrls = shortUrls });
+      .subscribe((shortUrls: ShortUrl[]) => this.shortUrls = shortUrls );
   }
 
   onShorten() {
-    if(this.url == '') return;
-    this.urlService.add({longUrl: this.url}, {id: 1})
+    if(this.url.trim() === '') return;
+    this.urlService.add({longUrl: this.url}, this.userService.currentUser)
       .pipe(map(shortUrl => ({...shortUrl, hash: shortUrl.hash})))
       .subscribe(shortUrl => {
         if(!this.shortUrls.find(row => row.hash === shortUrl.hash)) {
@@ -65,7 +75,7 @@ export class DashboardComponent implements OnInit {
   }
 
   removeUrl(row: ShortUrl) {
-    this.urlService.delete(row, { id: 1 }).subscribe(response => {
+    this.urlService.delete(row, this.userService.currentUser).subscribe(response => {
       this.shortUrls = this.shortUrls.filter(sUrl => sUrl !== row);
       this._snackBar.open("Url deleted", "Dismiss");
     }, error => {

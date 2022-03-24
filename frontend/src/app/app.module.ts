@@ -23,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MainComponent } from './main/main.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 
 @NgModule({
@@ -34,25 +35,26 @@ import { MainComponent } from './main/main.component';
     ProfileComponent,
     MainComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatInputModule,
-    FormsModule,
-    HttpClientModule,
-    MatProgressBarModule,
-    MatTableModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatPaginatorModule,
-    MatSnackBarModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInputModule,
+        FormsModule,
+        HttpClientModule,
+        MatProgressBarModule,
+        MatTableModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatListModule,
+        MatPaginatorModule,
+        MatSnackBarModule,
+        MatTabsModule,
+    ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
   ],

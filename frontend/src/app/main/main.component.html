@@ -6,11 +6,17 @@
     <span>Dwarf url</span>
 
     <div class="flex-left">
-      <button mat-raised-button>
+      <button mat-stroked-button color="primary" *ngIf="!userService.isLoggedIn()" [routerLink]="['login']">
         Login
       </button>
-      <button mat-raised-button color="primary">
+      <button mat-raised-button color="primary" *ngIf="!userService.isLoggedIn()" [routerLink]="['signup']">
         Signup
+      </button>
+      <span *ngIf="userService.isLoggedIn()" class="welcome">
+        Welcome again <b>{{userService.currentUser?.firstName}}</b>, <b>{{userService.currentUser?.lastName}}</b>!
+      </span>
+      <button mat-stroked-button color="primary" *ngIf="userService.isLoggedIn()" (click)="onLogout()">
+        Logout
       </button>
     </div>
   </mat-toolbar>
@@ -18,20 +24,20 @@
   <mat-sidenav-container>
     <mat-sidenav mode="side" opened="true" #sidenav>
       <mat-action-list disableRipple="true">
-        <mat-list-item active>
+        <mat-list-item [routerLink]="['home']" routerLinkActive="active">
           <div class="list-item">
             <mat-icon>link</mat-icon>
             <span>Urls</span>
           </div>
         </mat-list-item>
-        <mat-list-item disableRipple="true">
+        <mat-list-item *ngIf="userService.isLoggedIn()" [routerLink]="['profile']" routerLinkActive="active">
           <div class="list-item">
             <mat-icon>person</mat-icon>
             <span>Profile</span>
           </div>
         </mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item disableRipple="true">
+        <mat-list-item [routerLink]="['bug']">
           <div class="list-item">
             <mat-icon>bug_report</mat-icon>
             <span>Report website bugs</span>

@@ -55,11 +55,15 @@ mat-list-item {
   border-top-right-radius: 40px;
 }
 
-mat-list-item[active], mat-list-item[active]:hover {
-  color: #1967d2;
-  background-color: rgb(232 240 254);
+.active, .active:hover {
+  color: #1967d2 !important;
+  background-color: rgb(232 240 254) !important;
 }
 
 mat-divider {
   margin: 5px 0px;
+}
+
+.welcome {
+  font-size: 11pt;
 }

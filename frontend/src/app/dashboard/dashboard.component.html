@@ -2,7 +2,7 @@
   <img src="assets/logo.png" alt="Dwarf urls" />
 </div>
 <div class="add-wrapper">
-  <mat-form-field appearance="outline" [style.width.%]="60" floatLabel="always">
+  <mat-form-field appearance="outline" [style.width.%]="60" floatLabel="always" #formFieldUrl>
     <mat-label >Url</mat-label>
     <input matInput type="text" placeholder="https://www.dwarf.url/" [(ngModel)]="url">
   </mat-form-field>
@@ -46,7 +46,7 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="remove">
+    <ng-container matColumnDef="remove" *ngIf="this.userService.isLoggedIn()">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let shortUrl">
         <button mat-icon-button color="primary" matTooltip="remove" (click)="removeUrl(shortUrl)">

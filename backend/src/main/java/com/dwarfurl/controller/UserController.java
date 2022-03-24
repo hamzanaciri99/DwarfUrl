@@ -3,6 +3,7 @@ package com.dwarfurl.controller;
 import com.dwarfurl.dto.UserDto;
 import com.dwarfurl.model.ShortUrl;
 import com.dwarfurl.model.User;
+import com.dwarfurl.model.UserDetailsImp;
 import com.dwarfurl.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,12 +63,14 @@ public class UserController {
     }
 
     @PostMapping("login")
-    public ResponseEntity<Boolean> login(@RequestBody User user) {
+    public ResponseEntity<UserDto> login(@RequestBody User user) {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
         Authentication auth = authenticationManager.authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(auth);
-        return isLoggedIn();
+        user = ((UserDetailsImp) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
+        UserDto userDto = modelMapper.map(user, UserDto.class);
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
     @GetMapping("isLoggedIn")

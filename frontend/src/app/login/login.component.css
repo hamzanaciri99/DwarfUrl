@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.main_wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+h1 {
+  align-self: center;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 10pt;
+  color: #9a9a9a;
+}
+
+.footer a, .forgot {
+  text-decoration: none;
+}
+
+.forgot {
+  position: relative;
+  top: -15px;
+  font-size: 10pt;
+  color: #673ab7;
+  font-weight: 500;
+}

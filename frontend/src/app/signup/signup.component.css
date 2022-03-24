@@ -1,0 +1,38 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.main_wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.flex-row {
+  display: flex;
+  gap: 10px
+}
+
+
+h1 {
+  align-self: center;
+}
+
+:host ::ng-deep .mat-form-field-subscript-wrapper {
+  position: static;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 10pt;
+  color: #9a9a9a;
+}
+
+.footer a {
+  text-decoration: none;
+}

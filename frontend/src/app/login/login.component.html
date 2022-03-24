@@ -1,1 +1,19 @@
-<p>login works!</p>
+<form class="main_wrapper mat-elevation-z1" [style.width.px]="400">
+  <h1 class="mat-h1">Login</h1>
+  <mat-form-field appearance="outline" [style.width.%]="100">
+    <mat-label>Username</mat-label>
+    <input matInput type="text" name="username" placeholder="john_doe99" [(ngModel)]="username"/>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" [style.width.%]="100">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" name="password" placeholder="john_doe99" [(ngModel)]="password"/>
+  </mat-form-field>
+  <a class="forgot" href="/reset" color="primary">Forgot password?</a>
+
+  <button mat-raised-button color="primary" (click)="onLogin()">Login</button>
+
+  <div class="footer">
+    Don't have an account yet? <a href="/signup" class="mat-tab-link">Create</a> an account right now!
+  </div>
+</form>
