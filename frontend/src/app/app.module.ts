@@ -7,7 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatTableModule} from "@angular/material/table";
@@ -54,6 +54,7 @@ import {MatTabsModule} from "@angular/material/tabs";
         MatPaginatorModule,
         MatSnackBarModule,
         MatTabsModule,
+        ReactiveFormsModule,
     ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}

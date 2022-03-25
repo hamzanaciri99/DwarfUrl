@@ -25,4 +25,7 @@
   display: block;
   margin: 20px auto;
   width: 250px;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
 }

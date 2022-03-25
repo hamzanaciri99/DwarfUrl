@@ -36,3 +36,13 @@ h1 {
 .footer a {
   text-decoration: none;
 }
+
+.password-hint ul {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+}
+
+.password-hint {
+  font-size: 11pt;
+}
