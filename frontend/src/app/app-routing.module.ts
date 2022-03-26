@@ -17,7 +17,8 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       { path: 'profile', component: ProfileComponent, canActivate: [ProfileAuthService]},
-      { path: 'home', component: DashboardComponent}
+      { path: 'home', component: DashboardComponent},
+      { path: '**', redirectTo: 'home' }
     ]
   },
   { path: '**', redirectTo: 'home' }
