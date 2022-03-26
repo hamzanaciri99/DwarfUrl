@@ -25,6 +25,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { MainComponent } from './main/main.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import { SignupComponent } from './signup/signup.component';
+import { ReportComponent } from './report/report.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { SignupComponent } from './signup/signup.component';
     ProfileComponent,
     MainComponent,
     SignupComponent,
+    ReportComponent,
   ],
     imports: [
         BrowserModule,
@@ -57,6 +60,7 @@ import { SignupComponent } from './signup/signup.component';
         MatSnackBarModule,
         MatTabsModule,
         ReactiveFormsModule,
+        MatDialogModule
     ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}

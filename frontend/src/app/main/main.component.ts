@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from "../service/user.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {ReportComponent} from "../report/report.component";
 
 @Component({
   selector: 'app-main',
@@ -10,7 +12,10 @@ import {Router} from "@angular/router";
 })
 export class MainComponent implements OnInit {
 
-  constructor(public userService: UserService, private snackbar: MatSnackBar, private router: Router) { }
+  constructor(public userService: UserService,
+              private snackbar: MatSnackBar,
+              private router: Router,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -28,4 +33,11 @@ export class MainComponent implements OnInit {
     );
     this.router.navigate(['home']);
   }
+
+  openReportDialog() {
+    let dialogRef = this.dialog.open(ReportComponent, {
+      width: '400px'
+    });
+  }
+
 }

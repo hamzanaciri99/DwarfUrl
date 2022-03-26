@@ -1,0 +1,14 @@
+<div class="main_wrapper">
+  <div class="mat-h2">Report website bug</div>
+
+  <mat-form-field appearance="outline" [style.width.%]="100" [style.height.%]="70" >
+    <textarea
+      matInput
+      type="textarea"
+      rows="8"
+      placeholder="Please don't include any personal information!"
+      [(ngModel)]="message"> </textarea>
+  </mat-form-field>
+
+  <button [style.width.%]="100" mat-raised-button color="primary" (click)="onSubmit()">Send</button>
+</div>

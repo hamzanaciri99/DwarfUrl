@@ -37,7 +37,7 @@
           </div>
         </mat-list-item>
         <mat-divider></mat-divider>
-        <mat-list-item [routerLink]="['bug']">
+        <mat-list-item (click)="openReportDialog()">
           <div class="list-item">
             <mat-icon>bug_report</mat-icon>
             <span>Report website bugs</span>
