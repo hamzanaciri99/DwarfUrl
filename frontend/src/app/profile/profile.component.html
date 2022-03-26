@@ -1,1 +1,11 @@
-<p>profile works!</p>
+<app-user-info
+  [firstName]="firstName"
+  [lastName]="lastName"
+  [username]="username"
+  [email]="email"
+  [isSignup]="false"
+  [checkPassword]="false"
+  submitText="Update"
+  title="Update profile info"
+  (onSubmit)="onSubmit($event)">
+</app-user-info>

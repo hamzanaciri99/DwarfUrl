@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class MainComponent implements OnInit {
 
-  constructor(public userService: UserService, private snackbar: MatSnackBar) { }
+  constructor(public userService: UserService, private snackbar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -25,7 +25,7 @@ export class MainComponent implements OnInit {
           this.snackbar.open('Error logging out', 'Dismiss');
         }
       }
-    )
+    );
+    this.router.navigate(['home']);
   }
-
 }

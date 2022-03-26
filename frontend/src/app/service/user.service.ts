@@ -47,4 +47,8 @@ export class UserService {
   isLoggedIn(): boolean {
     return this.currentUser !== null;
   }
+
+  updateUser(user: User) {
+    return this.http.patch<User>(`${BASE_URL}/user/update`, user);
+  }
 }

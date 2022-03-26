@@ -1,6 +1,7 @@
 package com.dwarfurl.controller;
 
 import com.dwarfurl.dto.UserDto;
+import com.dwarfurl.dto.UserUpdateDto;
 import com.dwarfurl.model.ShortUrl;
 import com.dwarfurl.model.User;
 import com.dwarfurl.model.UserDetailsImp;
@@ -69,6 +70,25 @@ public class UserController {
         Authentication auth = authenticationManager.authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(auth);
         user = ((UserDetailsImp) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
+        UserDto userDto = modelMapper.map(user, UserDto.class);
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
+    }
+
+    @PatchMapping("update")
+    public ResponseEntity<UserDto> update(@RequestBody UserUpdateDto updatedUser) {
+        User user = userRepository.findById(updatedUser.getId()).get();
+
+        user.setUsername(updatedUser.getUsername());
+        user.setFirstName(updatedUser.getFirstName());
+        user.setLastName(updatedUser.getLastName());
+        user.setEmail(updatedUser.getEmail());
+
+        if(updatedUser.getPassword() != null) {
+            user.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+        }
+
+        userRepository.save(user);
+
         UserDto userDto = modelMapper.map(user, UserDto.class);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }

@@ -20,10 +20,11 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/material/snack-bar";
 import {AppRoutingModule} from "./app-routing.module";
 import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { UserInfoComponent } from './user-info/user-info.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MainComponent } from './main/main.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -31,9 +32,10 @@ import {MatTabsModule} from "@angular/material/tabs";
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    SignupComponent,
+    UserInfoComponent,
     ProfileComponent,
     MainComponent,
+    SignupComponent,
   ],
     imports: [
         BrowserModule,
